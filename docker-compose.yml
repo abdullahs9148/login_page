@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./frontend  # Build context = frontend/
+    ports:
+      - "3000:80"     # Map host port 3000 to NGINX port 80
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend   # Build context = backend/
+    ports:
+      - "5000:5000"    # Adjust ports as needed
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongo:27017/dbname  # Example MongoDB URI
+    depends_on:
+      - mongo
+
+  mongo:               # Example MongoDB service
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
