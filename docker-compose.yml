@@ -3,7 +3,7 @@ services:
   frontend:
     build: ./frontend  # Build context = frontend/
     ports:
-      - "3000:80"     # Map host port 3000 to NGINX port 80
+      - "5173:80"     # Map host port 3000 to NGINX port 80
     depends_on:
       - backend
 
@@ -13,7 +13,7 @@ services:
       - "5000:5000"    # Adjust ports as needed
     environment:
       - NODE_ENV=production
-      - MONGO_URI=mongodb://mongo:27017/dbname  # Example MongoDB URI
+      - MONGO_URI=mongodb://127.0.0.1:27017/practice_mern  # Example MongoDB URI
     depends_on:
       - mongo
 
